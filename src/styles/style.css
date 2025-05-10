@@ -19,4 +19,49 @@ body {
   background-color: var(--neutral-light);
   color: var(--neutral-dark);
   font-family: "Inter", sans-serif;
+  display: grid;
+  place-items: center;
+  transition: all 500ms;
+}
+
+body.dark{
+  background-color: var(--neutral-dark);
+  color: var(--neutral-light);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 500ms;
+}
+
+.content {
+  width: 100%;
+  max-width: 80%;
+  border: 1px solid;
+  margin-block: 1rem;
+  padding-inline: 1rem;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  line-height: 140%;
+  font-weight: 700;
+}
+
+.mode i {
+  font-size: 1.5rem;
+  color: var(--neutral-dark);
+}
+
+body.dark .mode i {
+  color: var(--neutral-light);
 }
