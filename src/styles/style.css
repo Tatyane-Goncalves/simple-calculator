@@ -1,0 +1,22 @@
+:root {
+  --primary: #3A86FF;
+  --secundary:	#06D6A0;
+  --neutral-light: #F0F0F0;
+  --neutral-medium: #BDBDBD;
+  --neutral-dark: #333;
+  --border: #ccc;
+  --erro: #EF233C;
+  --secundary-text: #BDBDBD;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--neutral-light);
+  color: var(--neutral-dark);
+  font-family: "Inter", sans-serif;
+}
