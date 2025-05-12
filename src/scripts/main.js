@@ -35,6 +35,7 @@ function init() {
 
 init()
 
+
 function updateDisplay(value) {
   resultBox.textContent = value || 0
 }
@@ -103,32 +104,78 @@ deleteButton.addEventListener("click", () => {
   setTimeout(() => deleteButton.classList.remove("active"), 100)
 })
 
-
 // Calculate function
 function calculate() {
-  const a = parseFloat(previousInput)
-  const b = parseFloat(currentInput)
-  let resultCalculate = 0
+  const firstNumber = parseFloat(previousInput)
+  const secondNumber = parseFloat(currentInput)
+  let resultCalculate 
+ 
+  if (isNaN(firstNumber) || isNaN(secondNumber)) {
+    updateDisplay("Error")
+    return
+  }
+
 
   switch (operator) {
     case "+":
-      resultCalculate = a + b
+      resultCalculate = firstNumber + secondNumber
       break
     case "-":
-      resultCalculate = a - b
+      resultCalculate = firstNumber - secondNumber
       break
     case "*":
-      resultCalculate = a * b
+      resultCalculate = firstNumber * secondNumber
       break 
     case "/":
-      resultCalculate = b === 0 ? "Erro" : a / b
+      if (secondNumber === 0) {
+        resultBox.value = "Erro: divisão por zero"
+        return
+      }
+      resultCalculate = firstNumber / secondNumber
       break
     default:
       return
   }
 
   currentInput = resultCalculate.toString()
-  operator = null
   previousInput = ""
+  operator =  null
   updateDisplay(currentInput)
 }
+
+document.addEventListener("keydown", function(event) {
+  const key = event.key
+
+  if (!isNaN(key) || key === ".") {
+    if (key === "." && currentInput.includes(".")) return
+    currentInput += key
+    updateDisplay(currentInput)
+  }
+
+  if (["+", "-", "*", "/"].includes(key)) {
+    if (currentInput === "") return;
+    if (previousInput !== "") {
+      calculate();
+    }
+    operator = key;
+    previousInput = currentInput;
+    currentInput = "";
+  }
+
+  if (key === "Enter") {
+    if (currentInput === "" || previousInput === "" || operator === null) return;
+    calculate()
+  }
+
+  if (key === "Backspace") {
+    currentInput = currentInput.slice(0, -1);
+    updateDisplay(currentInput);
+  }
+
+   if (key === "Escape") {
+    currentInput = "";
+    previousInput = "";
+    operator = null;
+    updateDisplay("0");
+  }
+})
